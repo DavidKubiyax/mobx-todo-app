@@ -1,5 +1,10 @@
 import { action, makeObservable, observable } from "mobx";
 
+/**
+ * Wrapping a model with an observable class allows for real-time updates 
+ * while maintaining the same instances, instead of overriding the entire
+ * collection with reduction.
+ */
 export default class TodoItem {
 
     constructor(id?: string) {

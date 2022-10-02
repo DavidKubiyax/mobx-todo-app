@@ -1,14 +1,12 @@
 import { action, IObservableArray, makeObservable, observable } from "mobx";
 import { generateUUID } from "../../utils";
-import TodoItem from "./TodoItem";
+import TodoItem from "../../components/todo/TodoItem";
 
 
 /**
- * Maintaining a singleton in TypeScript requires exporting an interface 
- * instead of the class definition to interact with the instance.
- * This way we achieve 2 important goals:
- * 1. Preventing the creation of a new instance.
- * 2. Allowing other classes to implement the interface for unit tests.
+ * Maintaining an interface along with a store allows us
+ * to easily implement another one for testing with mock
+ * data at any given phase of the app.
  */
 
 export interface ITodoStore {
@@ -20,22 +18,13 @@ export interface ITodoStore {
 
 /**
  * In general, a store's purpose is to hold and manage a cache of data.
- * Anything more specific than that should be done in local states, 
- * whether they're Mobx classes or local React useState.
+ * Anything more specific than that should be done in local states.
  */
 
-class TodoStore implements ITodoStore {
+export class TodoStore implements ITodoStore {
 
     constructor() {
         makeObservable(this);
-    }
-
-    /**
-     * In case a singleton needs to fetch important data, 
-     * it's crucial that it'd have an "init" function to be called
-     * when the app/first dependant component loads.
-     */
-    init() {
         // create fake data
         for (let i=0; i<10; i++) {
             const newTodo = new TodoItem(generateUUID());
@@ -66,6 +55,3 @@ class TodoStore implements ITodoStore {
     }
 
 }
-
-const todoStore = new TodoStore();
-export default todoStore;

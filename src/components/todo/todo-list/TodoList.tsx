@@ -1,15 +1,15 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { observer } from "mobx-react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TodoContext } from "../../../data/contexts/TodoContext";
 import TodoEditForm from "../todo-edit-form/TodoEditForm";
-import { TodoEditFormState } from "../todo-edit-form/TodoEditFormState";
 import TodoItem from "../TodoItem";
-import todoStore from "../TodoStore";
 import TodoListItem from "./todo-list-item/TodoListItem";
 
 const TodoList = observer(() => {
 
+    const {todoStore} = useContext(TodoContext);
     const [currentlyEditing, setCurrentlyEditing] = useState<TodoItem|undefined>();
 
     return (
@@ -17,9 +17,14 @@ const TodoList = observer(() => {
             <Stack sx={{width: '100%', height: '100%'}}>
                 <Typography variant="h1">TODO LIST</Typography>
                 <Button onClick={() => setCurrentlyEditing(new TodoItem())}>ADD NEW</Button>
-                <Stack gap={"10px"} alignItems={"center"}>
-                    {todoStore.todoItems.map(item => (
-                        <TodoListItem key={item.id} item={item} onEditRequest={(item) => setCurrentlyEditing(item)} onDeleteRequest={(item) => {todoStore.remove(item)}}/>
+                <Stack gap={"15px"} alignItems={"center"}>
+                    {todoStore?.todoItems.map(item => (
+                        <TodoListItem 
+                            key={item.id} 
+                            item={item} 
+                            onEditRequest={(item) => setCurrentlyEditing(item)} 
+                            onDeleteRequest={(item) => {todoStore.remove(item)}}
+                        />
                     ))}
                 </Stack>
             </Stack>
@@ -43,7 +48,7 @@ const TodoList = observer(() => {
                           around the content of a Modal.
                          */}
                         <TodoEditForm 
-                            formState={new TodoEditFormState(currentlyEditing!, todoStore)}
+                            itemForEdit={currentlyEditing}
                             afterSubmit={() => setCurrentlyEditing(undefined)}
                         />
                     </div>
