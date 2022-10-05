@@ -12,7 +12,6 @@ import TodoItem from "../models/TodoItem";
 export interface ITodoStore {
     todoItems: IObservableArray<TodoItem>;
     create: (item: TodoItem) => void;
-    update: (item: TodoItem) => void;
     remove: (item: TodoItem) => void;
 }
 
@@ -43,14 +42,6 @@ export class TodoStore implements ITodoStore {
         // The item is brand new and has no ID yet, we need to handle that
         item.id = generateUUID();
         this.todoItems.push(item);
-    }
-
-    @action update(item: TodoItem) {
-        // The item already exists, we need to find it and update it
-        const existingItem = this.todoItems.find(i => i.id === item.id);
-        if (!!existingItem) {
-            existingItem.update(item);
-        }
     }
 
     @action remove(item: TodoItem) {

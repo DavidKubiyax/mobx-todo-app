@@ -18,7 +18,7 @@ const TodoEditForm = observer(({itemForEdit, afterSubmit}: TodoEditFormProps) =>
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!!editClone.id) {
-            todoStore!.update(editClone);
+            itemForEdit.update(editClone);
         } else {
             todoStore!.create(editClone);
         }
