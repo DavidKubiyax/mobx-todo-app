@@ -21,10 +21,6 @@ const TodoEditForm = observer(({itemForEdit, afterSubmit}: TodoEditFormProps) =>
             todoStore!.update(editClone);
         } else {
             todoStore!.create(editClone);
-        }if (!!editClone.id) {
-            todoStore!.update(editClone);
-        } else {
-            todoStore!.create(editClone);
         }
         afterSubmit();
     }
