@@ -2,9 +2,9 @@ import { action, makeObservable, observable } from "mobx";
 
 interface ITodoItem {
     id?: string;
-    isDone?: boolean;
-    title?: string;
-    description?: string;
+    isDone: boolean;
+    title: string;
+    description: string;
 }
 
 /**
@@ -17,9 +17,9 @@ export default class TodoItem implements ITodoItem {
     constructor(params?: ITodoItem) {
         if (params) {
             this.id = params.id;
-            this.isDone = params.isDone ?? false;
-            this.title = params.title ?? "";
-            this.description = params.description ?? "";
+            this.isDone = params.isDone;
+            this.title = params.title;
+            this.description = params.description;
         }
         makeObservable(this);
     }

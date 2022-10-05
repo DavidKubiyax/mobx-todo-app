@@ -30,7 +30,8 @@ export class TodoStore implements ITodoStore {
             const newTodo = new TodoItem({
                 id: generateUUID(),
                 title: `item number ${i}`,
-                description: `description of item ${i}`
+                description: `description of item ${i}`,
+                isDone: false
             });
             this.create(newTodo);
         }
