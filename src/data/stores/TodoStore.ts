@@ -1,6 +1,6 @@
 import { action, IObservableArray, makeObservable, observable } from "mobx";
 import { generateUUID } from "../../utils";
-import TodoItem from "../../components/todo/TodoItem";
+import TodoItem from "../models/TodoItem";
 
 
 /**
@@ -27,9 +27,11 @@ export class TodoStore implements ITodoStore {
         makeObservable(this);
         // create fake data
         for (let i=0; i<10; i++) {
-            const newTodo = new TodoItem(generateUUID());
-            newTodo.setTitle(`item number ${i}`);
-            newTodo.setDescription(`description of item ${i}`);
+            const newTodo = new TodoItem({
+                id: generateUUID(),
+                title: `item number ${i}`,
+                description: `description of item ${i}`
+            });
             this.create(newTodo);
         }
     }

@@ -1,7 +1,7 @@
 import { Card, Checkbox, Icon, IconButton, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import { observer } from "mobx-react";
-import TodoItem from "../../TodoItem";
+import TodoItem from "../../../../data/models/TodoItem";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 

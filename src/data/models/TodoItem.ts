@@ -1,14 +1,26 @@
 import { action, makeObservable, observable } from "mobx";
 
+interface ITodoItem {
+    id?: string;
+    isDone?: boolean;
+    title?: string;
+    description?: string;
+}
+
 /**
  * Wrapping a model with an observable class allows for real-time updates 
  * while maintaining the same instances, instead of overriding the entire
  * collection with reduction.
  */
-export default class TodoItem {
+export default class TodoItem implements ITodoItem {
 
-    constructor(id?: string) {
-        this.id = id;
+    constructor(params?: ITodoItem) {
+        if (params) {
+            this.id = params.id;
+            this.isDone = params.isDone ?? false;
+            this.title = params.title ?? "";
+            this.description = params.description ?? "";
+        }
         makeObservable(this);
     }
 
@@ -34,11 +46,5 @@ export default class TodoItem {
         this.isDone = item.isDone;
         this.title = item.title;
         this.description = item.description;
-    }
-    
-    clone(): TodoItem {
-        const clone = new TodoItem(this.id);
-        clone.update(this);
-        return clone;
     }
 } 

@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useState, useContext } from "react";
 import { TodoContext } from "../../../data/contexts/TodoContext";
 import TodoEditForm from "../todo-edit-form/TodoEditForm";
-import TodoItem from "../TodoItem";
+import TodoItem from "../../../data/models/TodoItem";
 import TodoListItem from "./todo-list-item/TodoListItem";
 
 const TodoList = observer(() => {

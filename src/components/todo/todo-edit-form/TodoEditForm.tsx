@@ -3,7 +3,7 @@ import { Stack } from "@mui/system";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from 'react';
 import { TodoContext } from "../../../data/contexts/TodoContext";
-import TodoItem from "../TodoItem";
+import TodoItem from "../../../data/models/TodoItem";
 
 type TodoEditFormProps = {
     itemForEdit: TodoItem;
@@ -13,7 +13,7 @@ type TodoEditFormProps = {
 const TodoEditForm = observer(({itemForEdit, afterSubmit}: TodoEditFormProps) => {
 
     const { todoStore } = useContext(TodoContext);
-    const [editClone] = useState(itemForEdit.clone());
+    const [editClone] = useState(new TodoItem(itemForEdit));
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
